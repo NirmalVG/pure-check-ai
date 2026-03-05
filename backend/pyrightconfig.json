@@ -1,0 +1,12 @@
+{
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": ["."]
+    }
+  ],
+  "venvPath": "c:/projects/python-react-project/pure-check-ai/backend",
+  "venv": "venv",
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Windows"
+}
