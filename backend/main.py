@@ -13,7 +13,10 @@ app = FastAPI(title="PureCheck AI API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://your-app.netlify.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -127,3 +130,4 @@ def get_recommendations(skin_type: str = Form(...), sensitivities: str = Form(..
             } for i in top_ingredients
         ]
     }
+

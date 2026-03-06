@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 
-const API = "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const getBadgeClass = (rating) => {
   const r = (rating || "").toLowerCase();

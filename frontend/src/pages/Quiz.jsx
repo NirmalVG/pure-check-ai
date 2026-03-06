@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { Container, Row, Col } from "react-bootstrap"
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
-const API = "http://localhost:8000"
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 // Skin type quiz questions
 const quizData = [
@@ -70,72 +70,73 @@ const quizData = [
     skinMap: ["Oily", "Dry", "Combination", "Normal"],
     tip: "Dehydrated skin can benefit from hyaluronic acid regardless of your skin type.",
   },
-]
+];
 
 const Quiz = () => {
-  const [currentQ, setCurrentQ] = useState(0)
-  const [selected, setSelected] = useState(null)
-  const [answered, setAnswered] = useState(false)
-  const [skinScores, setSkinScores] = useState({})
-  const [finished, setFinished] = useState(false)
-  const [recommendations, setRecommendations] = useState(null)
+  const [currentQ, setCurrentQ] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [answered, setAnswered] = useState(false);
+  const [skinScores, setSkinScores] = useState({});
+  const [finished, setFinished] = useState(false);
+  const [recommendations, setRecommendations] = useState(null);
 
-  const q = quizData[currentQ]
-  const progress = ((currentQ + 1) / quizData.length) * 100
+  const q = quizData[currentQ];
+  const progress = ((currentQ + 1) / quizData.length) * 100;
 
   const handleSelect = (idx) => {
-    if (answered) return
-    setSelected(idx)
-    setAnswered(true)
+    if (answered) return;
+    setSelected(idx);
+    setAnswered(true);
 
     // Track skin type based on answer
     if (q.skinMap) {
-      const chosenType = q.skinMap[idx]
+      const chosenType = q.skinMap[idx];
       setSkinScores((prev) => ({
         ...prev,
         [chosenType]: (prev[chosenType] || 0) + 1,
-      }))
+      }));
     }
-  }
+  };
 
   const nextQuestion = async () => {
     if (currentQ < quizData.length - 1) {
-      setCurrentQ((c) => c + 1)
-      setSelected(null)
-      setAnswered(false)
+      setCurrentQ((c) => c + 1);
+      setSelected(null);
+      setAnswered(false);
     } else {
       // Finished!
-      setFinished(true)
+      setFinished(true);
 
       // Determine skin type from accumulated scores
       const bestType =
         Object.entries(skinScores).sort((a, b) => b[1] - a[1])[0]?.[0] ||
-        "Normal"
+        "Normal";
 
       try {
-        const fd = new FormData()
-        fd.append("skin_type", bestType)
-        fd.append("sensitivities", "none")
+        const fd = new FormData();
+        fd.append("skin_type", bestType);
+        fd.append("sensitivities", "none");
         const res = await fetch(`${API}/api/quiz/recommendations`, {
           method: "POST",
           body: fd,
-        })
-        const data = await res.json()
-        setRecommendations(data)
+        });
+        const data = await res.json();
+        setRecommendations(data);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     }
-  }
+  };
 
   const getOptionClass = (idx) => {
-    if (!answered) return selected === idx ? "selected" : ""
-    return idx === selected ? "selected" : ""
-  }
+    if (!answered) return selected === idx ? "selected" : "";
+    return idx === selected ? "selected" : "";
+  };
 
   if (finished) {
     const bestType =
-      Object.entries(skinScores).sort((a, b) => b[1] - a[1])[0]?.[0] || "Normal"
+      Object.entries(skinScores).sort((a, b) => b[1] - a[1])[0]?.[0] ||
+      "Normal";
     return (
       <div className="fade-in-up">
         <Container className="py-5">
@@ -217,12 +218,12 @@ const Quiz = () => {
             <button
               className="btn btn-pc-primary"
               onClick={() => {
-                setCurrentQ(0)
-                setSelected(null)
-                setAnswered(false)
-                setSkinScores({})
-                setFinished(false)
-                setRecommendations(null)
+                setCurrentQ(0);
+                setSelected(null);
+                setAnswered(false);
+                setSkinScores({});
+                setFinished(false);
+                setRecommendations(null);
               }}
             >
               <i className="bi bi-arrow-repeat me-2"></i>Retake Quiz
@@ -230,7 +231,7 @@ const Quiz = () => {
           </div>
         </Container>
       </div>
-    )
+    );
   }
 
   return (
@@ -360,7 +361,7 @@ const Quiz = () => {
         )}
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Quiz
+export default Quiz;
