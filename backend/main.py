@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from sqlalchemy import cast, String
 from fastapi import FastAPI, Depends, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
