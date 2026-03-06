@@ -13,15 +13,7 @@ from database.database import Base, SQLALCHEMY_DATABASE_URL
 from database.models import Ingredient, Product, SafetyRating
 
 def create_db():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password123"
-    )
-    cursor = conn.cursor()
-    cursor.execute("CREATE DATABASE IF NOT EXISTS purecheck;")
-    cursor.close()
-    conn.close()
+    pass
 
 def seed_data():
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
