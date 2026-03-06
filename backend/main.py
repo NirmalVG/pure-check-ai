@@ -13,15 +13,17 @@ from ocr_service import extract_ingredients_from_image
 
 app = FastAPI(title="PureCheck AI API")
 
+origins = [
+    "http://localhost:5173",
+    "https://purecheckai.netlify.app", 
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://purecheckai.netlify.app"
-    ],
+    allow_origins=origins, 
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],    
+    allow_headers=["*"],    
 )
 
 @app.get("/api/ingredients/search")
