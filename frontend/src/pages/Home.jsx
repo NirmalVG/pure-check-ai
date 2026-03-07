@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import "./Home.css";
 
 const Home = () => {
   const [activeInsightIndex, setActiveInsightIndex] = useState(0);
@@ -46,19 +47,12 @@ const Home = () => {
   const activeInsight = insightSlides[activeInsightIndex];
 
   return (
-    <div className="fade-in-up">
+    <div className="fade-in-up home-page">
       {/* Hero Section */}
-      <section
-        style={{
-          minHeight: "85vh",
-          display: "flex",
-          alignItems: "center",
-          paddingTop: "60px",
-        }}
-      >
+      <section className="hero-section d-flex align-items-center">
         <Container>
           <Row className="align-items-center g-5">
-            <Col lg={6} className="fade-in-up">
+            <Col lg={6} className="fade-in-up order-1 order-lg-1">
               <span
                 className="badge rounded-pill mb-3"
                 style={{
@@ -82,7 +76,7 @@ const Home = () => {
                 Your Beauty
               </h1>
               <p
-                className="mb-4"
+                className="mb-4 hero-subtext"
                 style={{
                   color: "var(--pc-muted)",
                   fontSize: "1.1rem",
@@ -94,7 +88,7 @@ const Home = () => {
                 conscious consumer. Understand every label with surgical
                 precision and clinical transparency.
               </p>
-              <div className="d-flex gap-3">
+              <div className="d-flex gap-3 hero-buttons">
                 <Link to="/analyze" className="btn btn-pc-primary">
                   Start Free Analysis
                 </Link>
@@ -103,7 +97,7 @@ const Home = () => {
                 </Link>
               </div>
             </Col>
-            <Col lg={6} className="text-center fade-in-up delay-2">
+            <Col lg={6} className="text-center fade-in-up delay-2 order-2 order-lg-2 hero-image-col">
               <img
                 src="/bottle.png"
                 alt="Premium Cosmetic Bottle"
@@ -121,9 +115,9 @@ const Home = () => {
       </section>
 
       {/* Chemical-to-Clear Difference */}
-      <section className="bg-pc-white py-5" style={{ padding: "100px 0" }}>
+      <section className="bg-pc-white py-5 section-padding">
         <Container className="text-center">
-          <h2 style={{ fontSize: "2.6rem", marginBottom: "12px" }}>
+          <h2 className="section-title">
             The Chemical-to-Clear Difference
           </h2>
           <p
@@ -138,10 +132,10 @@ const Home = () => {
           </p>
 
           <div
-            className="pc-card mx-auto p-4 p-md-5 text-start"
+            className="pc-card mx-auto p-4 p-md-5 text-start insight-card"
             style={{ maxWidth: 780, border: "1px solid var(--pc-border)" }}
           >
-            <Row className="mb-3 align-items-center">
+            <Row className="mb-3 align-items-center insight-card-header">
               <Col>
                 <small
                   className="text-uppercase"
@@ -260,20 +254,18 @@ const Home = () => {
                 }}
               ></div>
             </div>
-            <Row>
+            <Row className="insight-descriptions">
               <Col
                 className="fst-italic"
                 style={{ color: "var(--pc-muted)", fontSize: "0.88rem" }}
               >
-                Unprocessed chemical nomenclature often hides potential
-                biological risks.
+                {activeInsight.leftDescription}
               </Col>
               <Col
-                className="text-end fst-italic"
+                className="text-end text-md-end fst-italic"
                 style={{ color: "var(--pc-muted)", fontSize: "0.88rem" }}
               >
-                PureCheck AI cross-references clinical trials to provide
-                actionable health advice.
+                {activeInsight.rightDescription}
               </Col>
             </Row>
           </div>
@@ -281,11 +273,11 @@ const Home = () => {
       </section>
 
       {/* Pure Science, Pure Beauty */}
-      <section className="bg-pc-dark" style={{ padding: "100px 0" }}>
+      <section className="bg-pc-dark section-padding">
         <Container>
           <Row className="align-items-end mb-5">
             <Col lg={7}>
-              <h2 style={{ fontSize: "3rem", marginBottom: 20 }}>
+              <h2 className="section-title-lg">
                 Pure Science,
                 <br />
                 Pure Beauty
@@ -303,9 +295,9 @@ const Home = () => {
                 chemistry and conscious skincare choices.
               </p>
             </Col>
-            <Col lg={5} className="d-flex justify-content-end gap-3">
+            <Col lg={5} className="d-flex justify-content-end gap-3 stats-col stats-row">
               <div
-                className="text-center rounded-3 p-3 px-4"
+                className="text-center rounded-3 p-3 px-4 stat-box"
                 style={{ background: "rgba(255,255,255,0.05)" }}
               >
                 <div
@@ -330,7 +322,7 @@ const Home = () => {
                 </small>
               </div>
               <div
-                className="text-center rounded-3 p-3 px-4"
+                className="text-center rounded-3 p-3 px-4 stat-box"
                 style={{ background: "rgba(255,255,255,0.05)" }}
               >
                 <div
