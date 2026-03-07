@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { BrowserRouter, Routes, Route, Link, NavLink, useLocation } from "react-router-dom"
 import { Navbar, Nav, Container } from "react-bootstrap"
 import Home from "./pages/Home"
 import Analyze from "./pages/Analyze"
@@ -6,9 +7,18 @@ import Encyclopedia from "./pages/Encyclopedia"
 import Quiz from "./pages/Quiz"
 
 const AppNavbar = () => {
+  const [expanded, setExpanded] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    setExpanded(false)
+  }, [location.pathname])
+
   return (
     <Navbar
       expand="lg"
+      expanded={expanded}
+      onToggle={() => setExpanded(!expanded)}
       className="pc-navbar"
       fixed="top"
       style={{
@@ -17,7 +27,7 @@ const AppNavbar = () => {
       }}
     >
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" onClick={() => setExpanded(false)}>
           <i className="bi bi-stars me-2"></i>
           PureCheck AI
         </Navbar.Brand>
