@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--pc-font-sans) !important;
   background-color: var(--pc-cream);
