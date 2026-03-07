@@ -1,18 +1,25 @@
-import { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Route, Link, NavLink, useLocation } from "react-router-dom"
-import { Navbar, Nav, Container } from "react-bootstrap"
-import Home from "./pages/Home"
-import Analyze from "./pages/Analyze"
-import Encyclopedia from "./pages/Encyclopedia"
-import Quiz from "./pages/Quiz"
+import { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import Home from "./pages/Home";
+import Analyze from "./pages/Analyze";
+import Encyclopedia from "./pages/Encyclopedia";
+import Quiz from "./pages/Quiz";
 
 const AppNavbar = () => {
-  const [expanded, setExpanded] = useState(false)
-  const location = useLocation()
+  const [expanded, setExpanded] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    setExpanded(false)
-  }, [location.pathname])
+    setExpanded(false);
+  }, [location.pathname]);
 
   return (
     <Navbar
@@ -28,8 +35,7 @@ const AppNavbar = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" onClick={() => setExpanded(false)}>
-          <i className="bi bi-stars me-2"></i>
-          PureCheck AI
+          <img src="/logo.png" alt="PureCheck AI" className="navbar-logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-nav" />
         <Navbar.Collapse id="main-nav">
@@ -50,8 +56,8 @@ const AppNavbar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
 const Footer = () => {
   return (
@@ -59,16 +65,9 @@ const Footer = () => {
       <Container>
         <div className="row">
           <div className="col-md-4 mb-4">
-            <div
-              className="mb-3"
-              style={{
-                fontFamily: "var(--pc-font-serif)",
-                fontWeight: 700,
-                fontSize: "1.3rem",
-              }}
-            >
-              <i className="bi bi-stars me-2"></i>PureCheck AI
-            </div>
+            <Link to="/" className="d-inline-block mb-3">
+              <img src="/logo.png" alt="PureCheck AI" className="footer-logo" />
+            </Link>
             <p style={{ maxWidth: 300 }}>
               The world's most sophisticated cosmetic ingredient analyzer.
               Dedicated to transparency in the beauty industry.
@@ -97,8 +96,8 @@ const Footer = () => {
         </div>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
 function App() {
   return (
@@ -114,7 +113,7 @@ function App() {
       </main>
       <Footer />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
